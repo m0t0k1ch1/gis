@@ -77,22 +77,22 @@ func main() {
 		}
 
 		for _, issue := range issues {
-			fmt.Printf("%d: %s\n", *issue.Number, *issue.Title)
+			fmt.Printf("%d\t%s\t%s\n", *issue.Number, *issue.HTMLURL, *issue.Title)
 		}
 	}
 	app.Run(os.Args)
 }
 
 func getUser() (string, error) {
-	return getGitConfigValue("user.name")
+	return getGitConfig("user.name")
 }
 
 func getToken() (string, error) {
-	return getGitConfigValue("gis.token")
+	return getGitConfig("gis.token")
 }
 
 func getOwnerAndRepo() (string, string, error) {
-	url, err := getGitConfigValue("remote.origin.url")
+	url, err := getGitConfig("remote.origin.url")
 	if err != nil {
 		return "", "", err
 	}
@@ -110,7 +110,7 @@ func getOwnerAndRepo() (string, string, error) {
 	return matches[1], matches[2], nil
 }
 
-func getGitConfigValue(key string) (string, error) {
+func getGitConfig(key string) (string, error) {
 	cmd := exec.Command("git", "config", "--get", key)
 	var out bytes.Buffer
 	cmd.Stdout = &out
