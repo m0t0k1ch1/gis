@@ -13,7 +13,9 @@ $ go get github.com/m0t0k1ch1/gis
 
 ### Create personal access token
 
-Create [personal access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that is granted to access `repo` scope.
+Create [personal access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
+
+[![Gyazo](http://i.gyazo.com/f66e8571a00e7a8590c04db62c4df744.png)](http://gyazo.com/f66e8571a00e7a8590c04db62c4df744)
 
 ### Set gis.token
 
