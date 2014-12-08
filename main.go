@@ -23,7 +23,7 @@ func main() {
 
 	app := cli.NewApp()
 	app.Name = "gis"
-	app.Usage = "show git issue list"
+	app.Usage = "show GitHub issue list"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "user, u",
