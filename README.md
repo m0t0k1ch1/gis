@@ -3,6 +3,8 @@ gis
 
 command line GitHub issue list viewer
 
+![demo](http://i.gyazo.com/60598ed1f3a8efa4f95f2b55137a7716.gif)
+
 ## Installation
 
 ### go get
