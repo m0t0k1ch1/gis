@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"regexp"
@@ -23,7 +22,7 @@ const (
 func main() {
 	user, err := getUser()
 	if err != nil {
-		log.Fatal(err)
+		exit(err)
 	}
 
 	app := cli.NewApp()
@@ -57,11 +56,11 @@ func main() {
 	app.Action = func(c *cli.Context) {
 		token, err := getToken()
 		if err != nil {
-			log.Fatal(err)
+			exit(err)
 		}
 		owner, repo, err := getOwnerAndRepo()
 		if err != nil {
-			log.Fatal(err)
+			exit(err)
 		}
 
 		t := &oauth.Transport{
@@ -84,7 +83,7 @@ func main() {
 
 		issues, _, err := client.Issues.ListByRepo(owner, repo, opt)
 		if err != nil {
-			log.Fatal(err)
+			exit(err)
 		}
 
 		for _, issue := range issues {
@@ -136,4 +135,9 @@ func getGitConfig(key string) (val string, err error) {
 
 	val = strings.TrimSpace(out.String())
 	return
+}
+
+func exit(err error) {
+	fmt.Println(err)
+	os.Exit(1)
 }
