@@ -3,7 +3,7 @@ gis
 
 command line GitHub issue list viewer
 
-![demo](http://i.gyazo.com/60598ed1f3a8efa4f95f2b55137a7716.gif)
+[![Gyazo](http://i.gyazo.com/2c45b0a0a24b95aaa8d005c4d14d190f.gif)](http://gyazo.com/2c45b0a0a24b95aaa8d005c4d14d190f)
 
 ## Installation
 
