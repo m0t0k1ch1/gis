@@ -97,31 +97,38 @@ func getToken() (string, error) {
 	return getGitConfig("gis.token")
 }
 
-func getOwnerAndRepo() (string, string, error) {
+func getOwnerAndRepo() (owner, repo string, err error) {
 	url, err := getGitConfig("remote.origin.url")
 	if err != nil {
-		return "", "", err
+		return
 	}
 
 	re, err := regexp.Compile(`git@github\.com:(.+)/(.+)\.git`)
 	if err != nil {
-		return "", "", err
+		return
 	}
 
 	matches := re.FindStringSubmatch(url)
 	if len(matches) != 3 {
-		return "", "", fmt.Errorf("can't parse remote.origin.url")
+		err = fmt.Errorf("can't parse remote.origin.url")
+		return
 	}
 
-	return matches[1], matches[2], nil
+	owner = matches[1]
+	repo = matches[2]
+	return
 }
 
-func getGitConfig(key string) (string, error) {
+func getGitConfig(key string) (val string, err error) {
 	cmd := exec.Command("git", "config", "--get", key)
 	var out bytes.Buffer
+
 	cmd.Stdout = &out
-	if err := cmd.Run(); err != nil {
-		return "", err
+	if err = cmd.Run(); err != nil {
+		err = fmt.Errorf("can't get git config: %s", key)
+		return
 	}
-	return strings.TrimSpace(out.String()), nil
+
+	val = strings.TrimSpace(out.String())
+	return
 }
