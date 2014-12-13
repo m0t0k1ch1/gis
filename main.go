@@ -75,10 +75,10 @@ func main() {
 			},
 		}
 		if c.Bool("assignee") {
-			opt.Assignee = user
+			opt.Assignee = c.String("user")
 		}
 		if c.Bool("mentioned") {
-			opt.Mentioned = user
+			opt.Mentioned = c.String("user")
 		}
 
 		issues, _, err := client.Issues.ListByRepo(owner, repo, opt)
