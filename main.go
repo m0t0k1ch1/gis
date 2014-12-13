@@ -41,7 +41,12 @@ func main() {
 		cli.IntFlag{
 			Name:  "page, p",
 			Value: 1,
-			Usage: "page",
+			Usage: "page of results to retrieve",
+		},
+		cli.IntFlag{
+			Name:  "limit, l",
+			Value: 50,
+			Usage: "the number of results to include per page",
 		},
 	}
 	app.Action = func(c *cli.Context) {
@@ -61,7 +66,8 @@ func main() {
 
 		opt := &github.IssueListByRepoOptions{
 			ListOptions: github.ListOptions{
-				Page: c.Int("page"),
+				Page:    c.Int("page"),
+				PerPage: c.Int("limit"),
 			},
 		}
 		if c.Bool("assignee") {
