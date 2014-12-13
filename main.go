@@ -15,6 +15,11 @@ import (
 	"github.com/google/go-github/github"
 )
 
+const (
+	DefaultPage  = 1
+	DefaultLimit = 50
+)
+
 func main() {
 	user, err := getUser()
 	if err != nil {
@@ -40,12 +45,12 @@ func main() {
 		},
 		cli.IntFlag{
 			Name:  "page, p",
-			Value: 1,
+			Value: DefaultPage,
 			Usage: "page of results to retrieve",
 		},
 		cli.IntFlag{
 			Name:  "limit, l",
-			Value: 50,
+			Value: DefaultLimit,
 			Usage: "the number of results to include per page",
 		},
 	}
