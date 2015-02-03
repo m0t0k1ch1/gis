@@ -19,6 +19,10 @@ const (
 	DefaultLimit = 50
 )
 
+var (
+	re = regexp.MustCompile(`(?:git@github\.com:|https://github\.com/)([^/]+)/([^/]+)\.git`)
+)
+
 func main() {
 	user, err := getUser()
 	if err != nil {
@@ -103,11 +107,6 @@ func getToken() (string, error) {
 
 func getOwnerAndRepo() (owner, repo string, err error) {
 	url, err := getGitConfig("remote.origin.url")
-	if err != nil {
-		return
-	}
-
-	re, err := regexp.Compile(`(?:git@github\.com:|https://github\.com/)([^/]+)/([^/]+)\.git`)
 	if err != nil {
 		return
 	}
