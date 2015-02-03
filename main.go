@@ -107,7 +107,7 @@ func getOwnerAndRepo() (owner, repo string, err error) {
 		return
 	}
 
-	re, err := regexp.Compile(`git@github\.com:(.+)/(.+)\.git`)
+	re, err := regexp.Compile(`(?:git@github\.com:|https://github\.com/)([^/]+)/([^/]+)\.git`)
 	if err != nil {
 		return
 	}
