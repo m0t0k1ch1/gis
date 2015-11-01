@@ -20,7 +20,7 @@ const (
 )
 
 var (
-	re = regexp.MustCompile(`^(?:git@github\.com:|https://github\.com/)([^/]+)/([^/]+?)(?:\.git)?$`)
+	re = regexp.MustCompile(`^(?:(?:ssh://)?git@github\.com/?|https://github\.com/)([^/]+)/([^/]+?)(?:\.git)?$`)
 )
 
 func main() {
