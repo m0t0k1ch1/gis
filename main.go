@@ -2,13 +2,14 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"os"
 	"os/exec"
 	"regexp"
 	"strings"
 
-	"code.google.com/p/goauth2/oauth"
+	"golang.org/x/oauth2"
 
 	"github.com/codegangsta/cli"
 	"github.com/google/go-github/github"
@@ -67,10 +68,15 @@ func main() {
 			exit(err)
 		}
 
-		t := &oauth.Transport{
-			Token: &oauth.Token{AccessToken: token},
-		}
-		client := github.NewClient(t.Client())
+		ctx := context.Background()
+
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{
+				AccessToken: token,
+			},
+		)
+
+		client := github.NewClient(oauth2.NewClient(ctx, ts))
 
 		opt := &github.IssueListByRepoOptions{
 			ListOptions: github.ListOptions{
@@ -85,7 +91,7 @@ func main() {
 			opt.Mentioned = c.String("user")
 		}
 
-		issues, _, err := client.Issues.ListByRepo(owner, repo, opt)
+		issues, _, err := client.Issues.ListByRepo(ctx, owner, repo, opt)
 		if err != nil {
 			exit(err)
 		}
@@ -94,6 +100,7 @@ func main() {
 			fmt.Printf("%d\t%s\t%s\n", *issue.Number, *issue.HTMLURL, *issue.Title)
 		}
 	}
+
 	app.Run(os.Args)
 }
 
