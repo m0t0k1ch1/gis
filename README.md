@@ -1,6 +1,6 @@
 # gis
 
-command line GitHub issue list viewer written in Go
+a command line GitHub issue list viewer written in Go
 
 ref. [#8 Golang 製 コマンドラインから GitHub の issue / p-r をよしなに閲覧できる君](http://tech.kayac.com/archive/8_golang_github_issue.html)
 
